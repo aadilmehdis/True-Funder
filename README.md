@@ -16,7 +16,15 @@ Any donations or fundings given to the political parties are registered transact
 
 - How does it work
 
-Using stablecoins as a blockchain-based cryptocurrency solution. The EC enforces that all transactions made by political parties (be it expenditures or donations accepted) are made through the stablecoin platform. The public ledger can then be audited by the EC for all transactions made.
+Using stablecoins as a blockchain-based cryptocurrency solution. The EC enforces that all transactions made by political parties (be it expenditures or donations accepted) are made through the stablecoin platform. The public ledger can then be audited by the EC for all transactions made. In this way, all voters can track how much funding a party receives since all transactions happen on this network.
+
+- Features
+
+* Transparency of transactions
+* Stable monetary value : Since we are using stablecoins as form of currency
+* Verifiability: Blockchain inherently ensures it
+* Accessiblility: Anyone anywhere using this system can access the data
+* Scalable: Since this system uses Azure Blockchain Services to enable cryptocurrency transactions supported by EC and other relevant organisations
 
 
 - Technologies we are using
