@@ -28,6 +28,6 @@ Using stablecoins as a blockchain-based cryptocurrency solution. The EC enforces
 
 
 - Technologies we are using
-* Azure Services
-* Ethereum Blockchain as a Service (EBaaS) on Microsoft Azure
-* Smart Contracts
+    * Azure Services
+    * Ethereum Blockchain as a Service (EBaaS) on Microsoft Azure
+    * Smart Contracts
