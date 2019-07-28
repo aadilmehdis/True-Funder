@@ -20,11 +20,11 @@ Using stablecoins as a blockchain-based cryptocurrency solution. The EC enforces
 
 - Features
 
-* Transparency of transactions
-* Stable monetary value : Since we are using stablecoins as form of currency
-* Verifiability: Blockchain inherently ensures it
-* Accessiblility: Anyone anywhere using this system can access the data
-* Scalable: Since this system uses Azure Blockchain Services to enable cryptocurrency transactions supported by EC and other relevant organisations
+    * Transparency of transactions
+    * Stable monetary value : Since we are using stablecoins as form of currency
+    * Verifiability: Blockchain inherently ensures it
+    * Accessiblility: Anyone anywhere using this system can access the data
+    * Scalable: Since this system uses Azure Blockchain Services to enable cryptocurrency transactions supported by EC and other relevant organisations
 
 
 - Technologies we are using
