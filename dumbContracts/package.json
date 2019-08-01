@@ -1,0 +1,9 @@
+{
+  "name": "blockchain-ethereum-template",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "truffle": "^5.0.30",
+    "truffle-hdwallet-provider": "^1.0.6"
+  }
+}
