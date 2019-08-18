@@ -92,9 +92,9 @@
 
     <!--Section: Cards-->
     <section class="text-center">
-    {% for p in party %}
+    {% for p in all_parties %}
 
-      {% if p.pk % 2 == 1 %}
+      {% if p.pk|divisibleby:'2' is not True %}
         <!--Grid row-->
         <div class="row mb-4 wow fadeIn">
       {% endif %}
@@ -107,14 +107,14 @@
 
             <!--Card image-->
             <div class="view overlay">
-              <img src="{% static "img/party/{{ i.img_path }}" %}" class="card-img-top"
+              <img src="../static/img/party/{{ p.symbol }}" class="card-img-top"
                 alt="">
             </div>
 
             <!--Card content-->
             <div class="card-body">
               <!--Title-->
-              <h4 class="card-title">{{ i.party_name }}</h4>
+              <h4 class="card-title">{{ p.name }}</h4>
               <a href="" target="_blank"
                 class="btn btn-primary btn-md">View party
                 <i class="fas fa-play ml-2"></i>
@@ -127,7 +127,7 @@
         </div>
         <!--Grid column-->
 
-        {% if p.pk % 2 == 1 %}
+        {% if p.pk|divisibleby:'2' is True %}
           </div>
           <!--Grid row-->
         {% endif %}
