@@ -14,10 +14,10 @@ def index(request):
 
 
 def profile(request, pk=None):
+    print(request)
 
     if pk:
         user = User.objects.get(pk=pk)
-        # print(user.username)
     else:
         user = request.user
 
