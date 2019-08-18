@@ -94,9 +94,10 @@
     <section class="text-center">
     {% for p in party %}
 
-      
-      <!--Grid row-->
-      <div class="row mb-4 wow fadeIn">
+      {% if p.pk % 2 == 1 %}
+        <!--Grid row-->
+        <div class="row mb-4 wow fadeIn">
+      {% endif %}
 
         <!--Grid column-->
         <div class="col-md-6 mb-4">
@@ -106,7 +107,7 @@
 
             <!--Card image-->
             <div class="view overlay">
-              <img src="{% static "{{ i.img_path }}" %}" class="card-img-top"
+              <img src="{% static "img/party/{{ i.img_path }}" %}" class="card-img-top"
                 alt="">
             </div>
 
@@ -126,8 +127,11 @@
         </div>
         <!--Grid column-->
 
-      </div>
-      <!--Grid row-->
+        {% if p.pk % 2 == 1 %}
+          </div>
+          <!--Grid row-->
+        {% endif %}
+
     {% endfor %}
 
     </section>
