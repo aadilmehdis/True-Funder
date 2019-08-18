@@ -15,16 +15,11 @@ def index(request):
 
 def profile(request, pk=None):
     print(request)
-
-    if pk:
-        user = User.objects.get(pk=pk)
-    else:
-        user = request.user
+    print(pk)
+    party = Party.objects.get(pk=pk)
 
     context = {
-        'party_name': '',
-        'party_image_path': '',
-        'transactions': [],
+        'party': party,
     }
 
     return render(request, 'account/profile.html', context)
