@@ -29,13 +29,7 @@ def profile(request, pk=None):
 
     return render(request, 'account/profile.html', context)
 
-def pay(request, pk=None):
-
-    if pk:
-        user = User.objects.get(pk=pk)
-        # print(user.username)
-    else:
-        user = request.user
+def pay(request):
 
     context = {
     }
