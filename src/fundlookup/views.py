@@ -22,6 +22,7 @@ def profile(request, pk=None):
         user = request.user
 
     context = {
+        'transaction_active': True,
         'party_name': '',
         'party_image_path': '',
         'transactions': [],
@@ -32,6 +33,7 @@ def profile(request, pk=None):
 def pay(request):
 
     context = {
+        'pay_active': True,
     }
 
     return render(request, 'account/pay.html', context)
