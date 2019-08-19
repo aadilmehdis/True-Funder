@@ -20,13 +20,18 @@ def profile(request, pk=None):
 
     context = {
         'party': party,
+        'transaction_active': True,
+        'transactions': [],
     }
 
     return render(request, 'account/profile.html', context)
 
-def pay(request):
+def pay(request, pk=None):
 
+    party = Party.objects.get(pk=pk)
     context = {
+        'party': party,
+        'pay_active': True,
     }
 
     return render(request, 'account/pay.html', context)
