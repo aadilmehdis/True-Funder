@@ -20,28 +20,31 @@ def profile(request, pk=None):
 
     transaction_history_url = "http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address=%s" % (party.address)
     transaction_history = json.loads(requests.get(transaction_history_url).text)['result']
-    balance = 0
+    spent = 0
+    received = 0
 
     for t in transaction_history:
         t['value'] = int(t['value']) / 1e18
 
         if str(t['from']) == str(party.address).lower():
-            balance -= t['value']
+            spent += t['value']
             t['value'] =  "-" + str(t['value']) + " CC"
             t['state'] = True
         else:
-            balance += t['value']
+            received += t['value']
             t['value'] =  "+" + str(t['value']) + " CC"
             t['state'] = False
         t['timeStamp'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(t['timeStamp'])))
 
-    balance = str(balance) + " CC"
-    
+    spent = str(spent) + " CC"
+    received = str(received) + " CC"
+
     context = {
         'party': party,
         'transaction_active': True,
         'transactions': transaction_history,
-        'total_balance': balance,
+        'spent': spent,
+        'received': received
     }
 
     return render(request, 'account/profile.html', context)
