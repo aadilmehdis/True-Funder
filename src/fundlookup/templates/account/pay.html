@@ -9,7 +9,7 @@
     <!--Grid column-->
     <div class="col-md-12 mb-4">
 
-      <form class="text-center border-light p-5" action="#!" onSubmit="payParty" id="PayForm">
+      <form class="text-center border-light p-5" action="" id="PayForm" onsubmit="payParty()">
 
         <p class="h4 mb-4">Transfer Funds</p>
 
@@ -32,6 +32,3 @@
 
 {% endblock %}
 
-{% block script_file %}
-  <script type="text/javascript" src={% static "js/payment.js" %}></script>
-{% endblock %}

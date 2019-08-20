@@ -506,5 +506,8 @@ function makePayment(to_address, amount) {
 }
 
 function payParty() {
-	console.log(document.getElementById("PayForm").elements)
+	let to_address = document.getElementById("PayForm").elements[0].value;
+	let amount = document.getElementById("PayForm").elements[1].value;
+	makePayment(to_address, Number(amount));
+	return false;
 } 
