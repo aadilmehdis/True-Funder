@@ -23,8 +23,8 @@ def profile(request, pk=None):
         user = request.user
 
 
-    c = requests.get("http://greenticks.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address=0xf2838B47B20a0c5e7dA09F7C6f248584e75cAeeA&contractaddress=0x729703741512932bb12484372289e8f0bb7f2556")
-    d = requests.get("http://greenticks.eastus.cloudapp.azure.com/api?module=account&action=txlist&address=0x729703741512932bb12484372289e8f0bb7f2556")
+    c = requests.get("http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address=0xf2838B47B20a0c5e7dA09F7C6f248584e75cAeeA&contractaddress=0x729703741512932bb12484372289e8f0bb7f2556")
+    # d = requests.get("http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=txlist&address=0x729703741512932bb12484372289e8f0bb7f2556")
 
     print(c)
     print(d)
