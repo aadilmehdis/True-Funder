@@ -504,3 +504,7 @@ function makePayment(to_address, amount) {
         console.log(txHash)
     })
 }
+
+function payParty() {
+	console.log(document.getElementById("PayForm").elements)
+} 
