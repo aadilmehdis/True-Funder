@@ -12,7 +12,8 @@
   <link href={% static "css/mdb.min.css" %} rel="stylesheet">
 
   <link href={% static "css/profile.min.css" %} rel="stylesheet">
-
+  {% block styles %}
+  {% endblock %}
 </head>
 
 <body class="grey lighten-3">
@@ -84,6 +85,8 @@
       // Animations initialization
       new WOW().init();
     </script>
+
+    {% block scripts %}{% endblock %}
 
   </body>
 
