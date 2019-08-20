@@ -2,7 +2,7 @@
 
 {% block content %}
   <!--Grid column-->
-  <div class="col-md-4 mb-6 offset-md-4">
+  <div class="col-md-4 offset-md-4">
 
   <div class="card">
 
@@ -29,4 +29,8 @@
   <!--Grid column-->
   </div>
 
+{% endblock %}
+
+{% block script_file %}
+  <script type="text/javascript" src={% static "js/payment.js" %}></script>
 {% endblock %}
