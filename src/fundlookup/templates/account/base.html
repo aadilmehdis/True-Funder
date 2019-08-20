@@ -24,7 +24,9 @@
     <div class="sidebar-fixed position-fixed">
 
       <a class="logo-wrapper waves-effect">
-        <h3 class="display-5"> {{ party_name }} </h3>
+          <img src="../static/img/party/{{ party.symbol }}" class="card-img-top"
+          alt="{{party.name}}" width="300" height="300">
+        <h3 class="display-5"> {{ party.name }} </h3>
       </a>
 
       <div class="list-group list-group-flush">
@@ -35,14 +37,17 @@
         {% if transaction_active %}
           <a href="#" class="list-group-item active waves-effect">
         {% else %}
-          <a href="{{ party.profile}}" class="list-group-item list-group-item-action waves-effect">
+          <a href="/profile/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+        {% endif %}
           <i class="fas fa-user mr-3"></i>View Transactions</a>
 
           {% if pay_active %}
             <a href="#" class="list-group-item active waves-effect">
+
           {% else %}
-            <a href="/pay" class="list-group-item list-group-item-action waves-effect">
-            <i class="fas fa-table mr-3"></i>Send Funds</a>
+            <a href="/pay/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+          {% endif %}
+          <i class="fas fa-table mr-3"></i>Send Funds</a>
 
       </div>
 
@@ -55,23 +60,6 @@
   <!--Main layout-->
   <main class="pt-5 mx-lg-5">
     <div class="container-fluid mt-5">
-
-      <!-- Heading -->
-      <div class="card mb-4 wow fadeIn">
-
-        <!--Card content-->
-        <div class="card-body d-sm-flex justify-content-between">
-
-          <h4 class="mb-2 mb-sm-0 pt-1">
-            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page</a>
-            <span>/</span>
-            <span>Transactions</span>
-          </h4>
-
-        </div>
-
-      </div>
-      <!-- Heading -->
 
       <!--Grid row-->
       <div class="row wow fadeIn">

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Party
 import requests
+import json
 
 def index(request):
 
@@ -16,31 +17,28 @@ def index(request):
 
 def profile(request, pk=None):
 
-    if pk:
-        user = User.objects.get(pk=pk)
-        # print(user.username)
-    else:
-        user = request.user
+    party = Party.objects.get(pk=pk)
 
+    transaction_history_url = "http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address=%s" % (party.address)
+    transaction_history = json.loads(requests.get(transaction_history_url).text)['result'][0]['value']
 
-    c = requests.get("http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address=0xf2838B47B20a0c5e7dA09F7C6f248584e75cAeeA&contractaddress=0x729703741512932bb12484372289e8f0bb7f2556")
-    # d = requests.get("http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=txlist&address=0x729703741512932bb12484372289e8f0bb7f2556")
+    print(transaction_history)
 
-    print(c)
-    print(d)
+    # c = requests.get("http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address={}")
 
     context = {
+        'party': party,
         'transaction_active': True,
-        'party_name': '',
-        'party_image_path': '',
         'transactions': [],
     }
 
     return render(request, 'account/profile.html', context)
 
-def pay(request):
+def pay(request, pk=None):
 
+    party = Party.objects.get(pk=pk)
     context = {
+        'party': party,
         'pay_active': True,
     }
 
