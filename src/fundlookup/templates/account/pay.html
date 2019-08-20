@@ -1,16 +1,32 @@
 {% extends "account/base.html" %}
 
 {% block content %}
-<!--Grid row-->
-<div class="row wow fadeIn">
-
   <!--Grid column-->
-  <div class="col-md-12 mb-4">
+  <div class="col-md-4 mb-6 offset-md-4">
 
-    <h3> Do this, do that. Fuck politics. Live free. </h3>
+  <div class="card">
+
+    <!--Grid column-->
+    <div class="col-md-12 mb-4">
+
+      <form class="text-center border-light p-5" action="#!" onClick=makePayment()>
+
+        <p class="h4 mb-4">Transfer Funds</p>
+
+        <!-- Receiver ID -->
+        <input type="receiverid" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="to_id">
+
+        <!-- Fund Value -->
+        <input type="value" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="value">
+
+        <button class="btn btn-info btn-block my-4" type="submit">Pay ChaCoins</button>
+
+      </form>
+
+    </div>
 
   </div>
   <!--Grid column-->
-</div>
-<!--Grid row-->
+  </div>
+
 {% endblock %}
