@@ -506,12 +506,7 @@ function makePayment(to_address, amount) {
 }
 
 function payParty() {
-
-	try {
-		const accounts = await ethereum.enable()
-	} catch (error) {
-		console.log(reason === "User rejected provider access")
-	}
+	ethereum.enable()
 	let to_address = document.getElementById("PayForm").elements[0].value;
 	let amount = document.getElementById("PayForm").elements[1].value;
 	makePayment(to_address, Number(amount));
