@@ -16,8 +16,7 @@ bottom: .5em;
 {% endblock %}
 
 {% block content %}
-<!--Grid row-->
-<div class="row wow fadeIn">
+
 
   <!--Grid column-->
   <div class="col-md-12 mb-4">
@@ -63,15 +62,17 @@ bottom: .5em;
 
   </div>
   <!--Grid column-->
-</div>
-<!--Grid row-->
+
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
+
   $(document).ready(function() {
-    $('#dtBasicExample').DataTable();
+    $('#dtBasicExample').DataTable({
+      "scrollX": true,
+      "searching": true
+    });
     $('.dataTables_length').addClass('bs-select');
   });
-</script>
+
 {% endblock %}
