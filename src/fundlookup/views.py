@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Party
 import requests
 import json 
-
+import time
 def index(request):
 
     all_parties = Party.objects.all()
@@ -20,17 +20,19 @@ def profile(request, pk=None):
     party = Party.objects.get(pk=pk)
 
     transaction_history_url = "http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address=%s" % (party.address)
-    transaction_history = json.loads(requests.get(transaction_history_url).text)['result'][0]['value']
-    
+    transaction_history = json.loads(requests.get(transaction_history_url).text)['result']
+
+    for t in transaction_history:
+        t['value'] = int(t['value']) / 1e18
+        t['value'] = str(t['value']) + " CC"
+        t['timeStamp'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(t['timeStamp'])))
+     
     print(transaction_history)
-
-
-    # c = requests.get("http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address={}")
 
     context = {
         'party': party,
         'transaction_active': True,
-        'transactions': [],
+        'transactions': transaction_history,
     }
 
     return render(request, 'account/profile.html', context)
