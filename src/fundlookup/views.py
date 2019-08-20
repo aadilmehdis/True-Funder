@@ -2,13 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Party
 import requests
-import json 
+import json
 import time
 def index(request):
 
     all_parties = Party.objects.all()
-    for p in all_parties:
-        print(p.symbol)
+    
     context = {
         'all_parties': all_parties
     }
@@ -26,7 +25,7 @@ def profile(request, pk=None):
         t['value'] = int(t['value']) / 1e18
         t['value'] = str(t['value']) + " CC"
         t['timeStamp'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(t['timeStamp'])))
-     
+
     print(transaction_history)
 
     context = {
