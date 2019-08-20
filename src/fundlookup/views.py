@@ -23,7 +23,18 @@ def profile(request, pk=None):
 
     for t in transaction_history:
         t['value'] = int(t['value']) / 1e18
-        t['value'] = str(t['value']) + " CC"
+        if str(t['from']) == str(party.address):
+            print(t['from'])
+            print(party.address)
+            print("True")
+            t['value'] =  "-" + str(t['value']) + " CC"
+            t['state'] = True
+        else: 
+            print(t['from'])
+            print(party.address)
+            print("False")
+            t['value'] =  "+" + str(t['value']) + " CC"
+            t['state'] = False
         t['timeStamp'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(t['timeStamp'])))
 
     context = {
