@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Party
 import requests
+import json 
 
 def index(request):
 
@@ -15,16 +16,16 @@ def index(request):
 
 
 def profile(request, pk=None):
-    print(request)
-    print(pk)
+
     party = Party.objects.get(pk=pk)
 
+    transaction_history_url = "http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address=%s" % (party.address)
+    transaction_history = json.loads(requests.get(transaction_history_url).text)['result'][0]['value']
+    
+    print(transaction_history)
 
-    # c = requests.get("http://greenticks.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address=0xf2838B47B20a0c5e7dA09F7C6f248584e75cAeeA&contractaddress=0x729703741512932bb12484372289e8f0bb7f2556")
-    # d = requests.get("http://greenticks.eastus.cloudapp.azure.com/api?module=account&action=txlist&address=0x729703741512932bb12484372289e8f0bb7f2556")
 
-    # print(c)
-    # print(d)
+    # c = requests.get("http://chacoin.eastus.cloudapp.azure.com/api?module=account&action=tokentx&address={}")
 
     context = {
         'party': party,
