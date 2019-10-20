@@ -1,6 +1,6 @@
 # CodeFunDo++ 2019
 
-### Team name: Greenticks | Video Link: https://www.youtube.com/watch?v=JTbwve0yLD8
+### Team name: Greenticks || Video Link: https://www.youtube.com/watch?v=JTbwve0yLD8
 
 
 ## Contents
