@@ -1,6 +1,6 @@
-# CodeFunDo++ 2019
+# True Funder
 
-### Team name: Greenticks || Video Link: https://www.youtube.com/watch?v=JTbwve0yLD8
+### Enabling transparent political party funding using blockchain || Team name: Greenticks
 
 
 ## Contents
