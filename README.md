@@ -1,6 +1,6 @@
 # True Funder
 
-### Enabling transparent political party funding using blockchain || Team name: Greenticks
+### Enabling transparent political party funding using blockchain
 
 
 ## Contents
