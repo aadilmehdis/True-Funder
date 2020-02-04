@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('deposit/<int:pk>', views.deposit, name='deposit'),
     path('pay/<int:pk>', views.pay, name='pay'),
     path('ajax/load-vendor/', views.load_vendor, name='ajax_load_vendor'),
+    path('', include("django.contrib.auth.urls"))
 ]
