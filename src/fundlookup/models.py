@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
-    user                = models.OneToOneField(User)
+    user                = models.OneToOneField(User, on_delete=models.CASCADE)
 
     USER_TYPE           = [
         ('VR', "Vendor"),
@@ -18,11 +18,11 @@ class UserProfile(models.Model):
 
     avatar_path         = models.CharField("Avatar Path", max_length=500)
     metamask_address    = models.CharField("Metamask Address", max_length=500)
-    available_funds     = models.FloatField()
-    amount_requested    = models.FloatField()
+    available_funds     = models.FloatField("Available Funds")
+    amount_requested    = models.FloatField("Amount Requested")
 
 class Funder(models.Model):
-    user                = models.OneToOneField(User)
+    user                = models.OneToOneField(User, on_delete=models.CASCADE)
 
     FUNDER_TYPE         = [
         ("IND", "Individual"),
@@ -35,7 +35,7 @@ class Funder(models.Model):
     )
 
 class Vendor(models.Model):
-    user                = models.OneToOneField(User)
+    user                = models.OneToOneField(User, on_delete=models.CASCADE)
 
     VENDOR_TYPE         = [
         ("PB", "Publicity"),
@@ -49,8 +49,8 @@ class Vendor(models.Model):
         default="MC",
     )
 
-class Party(models.Model):
-    user                = models.OneToOneField(User)
+class PoliticalParty(models.Model):
+    user                = models.OneToOneField(User, on_delete=models.CASCADE)
 
     PARTY_TYPE         = [
         ("RG", "Regional"),
@@ -63,12 +63,12 @@ class Party(models.Model):
     )
 
 class Admin(models.Model):
-    user                = models.OneToOneField(User)
+    user                = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 class Transactions(models.Model):
-    donated_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    donated_to = models.ForeignKey(User, on_delete=models.CASCADE)
+    donated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_donated_by')
+    donated_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_donated_to')
 
 class Party(models.Model):
     name    = models.CharField("Name", max_length=120)
