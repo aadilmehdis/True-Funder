@@ -9,18 +9,29 @@
     <!--Grid column-->
     <div class="col-md-12 mb-4">
 
-      <form class="text-center border-light p-5" action="" id="PayForm" onsubmit="payParty()">
+      <form class="text-center border-light p-5" action="" id="DepositForm" data-vendor-url="{% url 'ajax_load_vendor' %}" onsubmit="payVendor()">
 
-        <p class="h4 mb-4">Transfer Funds</p>
+        <p class="h4 mb-4">Pay Vendor</p>
 
-        <!-- Receiver ID -->
+        <!-- User ID -->
         <input type="receiverid" id="defaultLoginFormEmail" class="form-control mb-4" value = "{{party.address}}" disabled>
 
+        <!-- Vendor category -->
+        <select name="vendor_cat" id="id_vendortype">
+          <option value="" id="id_vendortype">---------</option>
+          {% for type in allparty %}
+            <option value="{{ type.pk }}">{{ type.name }}</option>
+          {% endfor %}
+        </select>
+
+        <select name="vendors" id="id_vendor">
+          <option value="" id="id_vendornone">---------</option>
+        </select>
 
         <!-- Fund Value -->
         <input type="value" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="value">
 
-        <button class="btn btn-info btn-block my-4" type="submit" >Pay ChaCoins</button>
+        <button class="btn btn-info btn-block my-4" type="submit" >Pay Vendor</button>
 
       </form>
 
@@ -32,3 +43,24 @@
 
 {% endblock %}
 
+{% block scriptfile %}
+
+<script>
+    $("#id_vendortype").change(function () {
+      var url = $("#DepositForm").attr("data-vendor-url");
+      var vendor_type = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'vendor_type': vendor_type
+        },
+        success: function (data) {
+          $("#id_vendor").html(data);console.log(data);
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}
