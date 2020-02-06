@@ -1,7 +1,7 @@
 // Navbars
 .navbar {
-  box-shadow: $z-depth-1;
   font-weight: $navbar-font-weight;
+  box-shadow: $z-depth-1;
   form {
     .md-form {
       input {
@@ -10,11 +10,11 @@
     }
   }
   .breadcrumb {
-    margin: 0;
     padding: $navbar-breadcrumb-padding-top 0 0 $navbar-breadcrumb-padding-left;
-    background-color: inherit;
+    margin: 0;
     font-size: $navbar-double-font-size;
     font-weight: $navbar-font-weight;
+    background-color: inherit;
     .breadcrumb-item {
       color: $white-base;
       &.active {
@@ -26,8 +26,8 @@
     }
   }
   .navbar-toggler {
-    outline: 0;
     border-width: 0;
+    outline: 0;
   }
   .nav-flex-icons {
     flex-direction: row;
@@ -65,7 +65,9 @@
       padding: $navbar-dropdown-menu-padding;
       font-size: $navbar-dropdown-font-size;
       font-weight: $navbar-font-weight;
-      color: $black;
+      &:not(.active) {
+        color: $black;
+      }
     }
     form {
       @media (max-width: $small-screen) {
@@ -84,25 +86,15 @@
   }
   &.scrolling-navbar {
     @media (min-width: $small-screen) {
-      transition: $navbar-scrolling-transition;
       padding-top: $navbar-scrolling-padding;
       padding-bottom: $navbar-scrolling-padding;
+      transition: $navbar-scrolling-transition;
       .navbar-nav > li {
         transition-duration: $navbar-scrolling-transition-duration;
       }
       &.top-nav-collapse {
         padding-top: $navbar-top-collapse-padding;
         padding-bottom: $navbar-top-collapse-padding;
-      }
-    }
-  }
-  &.fixed-top,
-  &.sticky-top {
-    .navbar-collapse {
-      @media (min-width: 400px) and (max-width: 767px), (min-width: 800px) and (max-width: 850px) {
-        max-height: 340px;
-        overflow-x: hidden;
-        overflow-y: auto;
       }
     }
   }

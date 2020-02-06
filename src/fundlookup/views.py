@@ -82,6 +82,22 @@ def pay(request, pk=None):
 
     return render(request, 'account/pay.html', context)
 
+def analytics(request, pk=None):
+
+    party = Party.objects.get(pk=pk)
+    values = [65, 59, 80, 81, 56, 55, 40]
+    labels = ["January", "February", "March", "April", "May", "June", "July"]
+
+    context = {
+        'analytics_active': True,
+        'values': values,
+        'labels': labels,
+        'party': party,
+        'balance' : "1250 CC"
+    }
+
+    return render(request, 'account/analytics.html', context)
+
 def load_vendor(request):
     vendor_type = request.GET.get('vendor_type')
     print(vendor_type,"ada")

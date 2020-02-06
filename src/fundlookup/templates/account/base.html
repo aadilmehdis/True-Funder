@@ -36,7 +36,7 @@
 
       <div class="list-group list-group-flush">
         <a href="/" class="list-group-item list-group-item-action waves-effect">
-          <i class="fas fa-chart-pie mr-3"></i>Home
+          <i class="fas fa-user mr-3"></i>Home
         </a>
 
         {% if transaction_active %}
@@ -44,7 +44,7 @@
         {% else %}
           <a href="/profile/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
         {% endif %}
-          <i class="fas fa-user mr-3"></i>View Transactions</a>
+          <i class="fas fa-file-invoice-dollar mr-3"></i>View Transactions</a>
 
         {% if transfer_active %}
           <a href="#" class="list-group-item active waves-effect">
@@ -52,7 +52,7 @@
         {% else %}
           <a href="/transfer/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
         {% endif %}
-        <i class="fas fa-table mr-3"></i>Send Funds</a>
+        <i class="fas fa-dollar-sign mr-4"></i>Send Funds</a>
 
         {% if deposit_active %}
           <a href="#" class="list-group-item active waves-effect">
@@ -60,7 +60,7 @@
         {% else %}
           <a href="/deposit/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
         {% endif %}
-        <i class="fas fa-table mr-3"></i>Request ChaCoins</a>
+        <i class="fas fa-coins mr-3"></i>Request ChaCoins</a>
 
         {% if pay_active %}
           <a href="#" class="list-group-item active waves-effect">
@@ -68,7 +68,15 @@
         {% else %}
           <a href="/pay/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
         {% endif %}
-        <i class="fas fa-table mr-3"></i>Pay Vendor</a>
+        <i class="fas fa-money-bill-wave-alt mr-3"></i>Pay Vendor</a>
+
+        {% if analytics_active %}
+          <a href="#" class="list-group-item active waves-effect">
+
+        {% else %}
+          <a href="/analytics/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+        {% endif %}
+        <i class="fas fa-chart-pie mr-3"></i>Analytics</a>
 
       </div>
 
@@ -80,7 +88,9 @@
 
   <!--Main layout-->
   <main class="pt-5 mx-lg-5">
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-1">
+
+      {% block heading %}{% endblock %}
 
       <!--Grid row-->
       <div class="row wow fadeIn">
@@ -104,6 +114,7 @@
     <script type="text/javascript" src={% static "js/transfer.js" %}></script>
     <script type="text/javascript" src={% static "js/deposit.js" %}></script>
     <script type="text/javascript" src={% static "js/vendor.js" %}></script>
+    <script type="text/javascript" src={% static "js/chartjs-datalabels.js" %}></script>
 
     <!-- Initializations -->
     <script type="text/javascript">

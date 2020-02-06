@@ -15,11 +15,25 @@ bottom: .5em;
 }
 {% endblock %}
 
+{% block heading %}
+<!-- Heading -->
+<div class="card mb-4 wow fadeIn">
+
+  <!--Card content-->
+  <div class="card-body d-sm-flex justify-content-between">
+
+    <h4 class="mb-2 mb-sm-0 pt-1">
+        Amount received: {{ received }} | Amount spent: {{ spent }}
+    </h4>
+  </div>
+
+</div>
+<!-- Heading -->
+
+{% endblock %}
+
 {% block content %}
 
-  <h3 class="display-5"> Amount received: <strong>{{ received }}</strong> | Amount spent: <strong>{{ spent }}</strong> </h2>
-
-  <hr class='my-5'>
   <!--Grid column-->
   <div class="col-md-12 mb-4">
     <table id="dtBasicExample" class="table table-striped table-bordered table-hover table-sm" cellspacing="0" width="100%">

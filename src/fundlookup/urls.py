@@ -7,6 +7,7 @@ urlpatterns = [
     path('transfer/<int:pk>', views.transfer, name='transfer'),
     path('deposit/<int:pk>', views.deposit, name='deposit'),
     path('pay/<int:pk>', views.pay, name='pay'),
+    path('analytics/<int:pk>', views.analytics, name='analytics'),
     path('ajax/load-vendor/', views.load_vendor, name='ajax_load_vendor'),
     path('', include("django.contrib.auth.urls"))
 ]
