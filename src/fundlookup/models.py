@@ -16,6 +16,22 @@ class UserProfile(models.Model):
         default="FD",
     )
 
+    USER_LOCATION       = [
+        ('TN', "Tamil Nadu"),
+        ('TG', "Telangana"),
+        ('MP', "Madhya Pradesh"),
+        ('HR', "Haryana"),
+        ('CH', "Chhattisgarh"),
+        ('MR', "Maharashtra"),
+        ('TR', "Tripura"),
+        ('KR', "Karnataka"),
+        ('UP', "Uttar Pradesh"),
+        ('GJ', "Gujarat"),
+        ('OD', "Odisha"),
+        ('RJ', "Rajasthan"),
+        ('HP', "Himachal Pradesh"),
+    ]
+
     avatar_path         = models.CharField("Avatar Path", max_length=500)
     metamask_address    = models.CharField("Metamask Address", max_length=500)
     available_funds     = models.FloatField("Available Funds")

@@ -4,8 +4,11 @@ from .models import Party
 import requests
 import json
 import time
-def index(request):
 
+def index(request):
+    print(request.user)
+    print(request.user.pk)
+    print(request.user.is_authenticated)
     all_parties = Party.objects.all()
 
     context = {

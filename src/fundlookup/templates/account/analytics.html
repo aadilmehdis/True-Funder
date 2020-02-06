@@ -76,13 +76,7 @@
 
     <!--Card content-->
     <div class="card-body">
-      <!--Google map-->
-      <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
-        <iframe src="" frameborder="0" style="border:0" allowfullscreen></iframe>
-      </div>
-
-      <!--Google Maps-->
-
+        <div id="myMap" style="position:relative;width:100%;min-width:290px;height:600px;"></div>
     </div>
 
   </div>
@@ -238,5 +232,125 @@
       }
     }
   });
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+var map, datasource;
+
+//GeoJSON feed of all earthquakes from the past 30 days. Sourced from the USGS.
+var earthquakeFeed = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson';
+
+//Find more earthquake data feeds here: https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+
+function GetMap() {
+    //Initialize a map instance.
+    map = new atlas.Map('myMap', {
+        center: [78.962, 20.593],
+        zoom: 3.8,
+        style: 'satellite_road_labels', 
+        view: 'Unified',
+
+//Add your Azure Maps subscription key to the map SDK. Get an Azure Maps key at https://azure.com/maps
+        authOptions: {
+            authType: 'subscriptionKey',
+            subscriptionKey: 'WrI9HL-P9iIvjjVbZkZsuGdVHzxu_MayZ9r3zg1_X1s'
+        }
+    }); 
+
+    //Wait until the map resources are ready.
+    map.events.add('ready', function () {
+
+        //Create a data source and add it to the map.
+        datasource = new atlas.source.DataSource(null, {
+            //Tell the data source to cluster point data.
+            cluster: true,
+
+            //The radius in pixels to cluster points together.
+            clusterRadius: 45,
+
+            //The maximium zoom level in which clustering occurs.
+            //If you zoom in more than this, all points are rendered as symbols.
+            clusterMaxZoom: 15 
+        });
+        map.sources.add(datasource);
+        
+        //Create a bubble layer for rendering clustered data points.
+        var clusterBubbleLayer = new atlas.layer.BubbleLayer(datasource, null, {
+            //Scale the size of the clustered bubble based on the number of points inthe cluster.
+            radius: [
+                'step',
+                ['get', 'point_count'],
+                20,         //Default of 20 pixel radius.
+                100, 30,    //If point_count >= 100, radius is 30 pixels.
+                750, 40     //If point_count >= 750, radius is 40 pixels.
+            ],
+
+            //Change the color of the cluster based on the value on the point_cluster property of the cluster.
+            color: [
+                'step',
+                ['get', 'point_count'],
+                'rgba(0,255,0,0.8)',            //Default to green. 
+                100, 'rgba(255,255,0,0.8)',     //If the point_count >= 100, color is yellow.
+                750, 'rgba(255,0,0,0.8)'        //If the point_count >= 100, color is red.
+            ],
+            strokeWidth: 0,
+            filter: ['has', 'point_count'] //Only rendered data points which have a point_count property, which clusters do.
+        });
+
+        //Add a click event to the layer so we can zoom in when a user clicks a cluster.
+        map.events.add('click', clusterBubbleLayer, clusterClicked);
+
+        //Add mouse events to change the mouse cursor when hovering over a cluster.
+        map.events.add('mouseenter', clusterBubbleLayer, function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.events.add('mouseleave', clusterBubbleLayer, function () {
+            map.getCanvas().style.cursor = '';
+        });
+
+        //Add the clusterBubbleLayer and two additional layers to the map.
+        map.layers.add([
+            clusterBubbleLayer,
+
+            //Create a symbol layer to render the count of locations in a cluster.
+            new atlas.layer.SymbolLayer(datasource, null, {
+                iconOptions: {
+                    image: 'none' //Hide the icon image.
+                },
+                textOptions: {
+                    textField: ['get' , 'point_count_abbreviated'],
+                    offset: [0, 0.4]
+                }
+            }),
+
+            //Create a layer to render the individual locations.
+            new atlas.layer.SymbolLayer(datasource, null, {
+                filter: ['!', ['has', 'point_count']] //Filter out clustered points from this layer.
+            })
+        ]);
+
+        //Retrieve a GeoJSON data set and add it to the data source. 
+        datasource.importDataFromUrl(earthquakeFeed);
+    });
+}
+
+function clusterClicked(e) {
+    if (e && e.shapes && e.shapes.length > 0 && e.shapes[0].properties.cluster) {
+        //Get the clustered point from the event.
+        var cluster = e.shapes[0];
+
+        //Get the cluster expansion zoom level. This is the zoom level at which the cluster starts to break apart.
+        datasource.getClusterExpansionZoom(cluster.properties.cluster_id).then(function (zoom) {
+
+            //Update the map camera to be centered over the cluster. 
+            map.setCamera({
+                center: cluster.geometry.coordinates,
+                zoom: zoom,
+                type: 'ease',
+                duration: 200
+            });
+        });
+    }
+}
 </script>
 {% endblock %}
