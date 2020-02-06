@@ -50,38 +50,44 @@
         {% endif %}
           <i class="fas fa-file-invoice-dollar mr-3"></i>View Transactions</a>
 
-        {% if transfer_active %}
-          <a href="#" class="list-group-item active waves-effect">
-
-        {% else %}
-          <a href="/transfer/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+        {% if user_type == "FD" %}
+          {% if transfer_active %}
+            <a href="#" class="list-group-item active waves-effect">
+          {% else %}
+            <a href="/transfer/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+          {% endif %}
+          <i class="fas fa-dollar-sign mr-4"></i>Send Funds</a>
         {% endif %}
-        <i class="fas fa-dollar-sign mr-4"></i>Send Funds</a>
 
-        {% if deposit_active %}
-          <a href="#" class="list-group-item active waves-effect">
-
-        {% else %}
-          <a href="/deposit/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+        {% if user_type == "FD" %}
+          {% if deposit_active %}
+            <a href="#" class="list-group-item active waves-effect">
+          {% else %}
+            <a href="/deposit/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+          {% endif %}
+          <i class="fas fa-coins mr-3"></i>Request ChaCoins</a>
         {% endif %}
-        <i class="fas fa-coins mr-3"></i>Request ChaCoins</a>
 
-        {% if pay_active %}
-          <a href="#" class="list-group-item active waves-effect">
-
-        {% else %}
-          <a href="/pay/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+        {% if user_type == "PP" %}
+          {% if pay_active %}
+            <a href="#" class="list-group-item active waves-effect">
+          {% else %}
+            <a href="/pay/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+          {% endif %}
+          <i class="fas fa-money-bill-wave-alt mr-3"></i>Pay Vendor</a>
         {% endif %}
-        <i class="fas fa-money-bill-wave-alt mr-3"></i>Pay Vendor</a>
 
         {% if analytics_active %}
           <a href="#" class="list-group-item active waves-effect">
-
         {% else %}
           <a href="/analytics/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
         {% endif %}
         <i class="fas fa-chart-pie mr-3"></i>Analytics</a>
 
+        {% if user_type is not None %}
+          <a href="/logout" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-user mr-3"></i>Logout</a>
+        {% endif %}
       </div>
 
     </div>
