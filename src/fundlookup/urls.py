@@ -1,4 +1,6 @@
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
+
 from . import views
 
 urlpatterns = [
@@ -9,5 +11,6 @@ urlpatterns = [
     path('pay/<int:pk>', views.pay, name='pay'),
     path('analytics/<int:pk>', views.analytics, name='analytics'),
     path('ajax/load-vendor/', views.load_vendor, name='ajax_load_vendor'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='index'),
     path('', include("django.contrib.auth.urls"))
 ]
