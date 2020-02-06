@@ -82,9 +82,10 @@ class Admin(models.Model):
     user                = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
-class Transactions(models.Model):
+class Transaction(models.Model):
     donated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_donated_by')
     donated_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_donated_to')
+    amount     = models.FloatField("Amount")
 
 class Party(models.Model):
     name    = models.CharField("Name", max_length=120)
