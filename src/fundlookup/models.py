@@ -32,6 +32,12 @@ class UserProfile(models.Model):
         ('HP', "Himachal Pradesh"),
     ]
 
+    user_location         = models.CharField(
+        max_length=2,
+        choices=USER_LOCATION,
+        default="TN",
+    )
+
     avatar_path         = models.CharField("Avatar Path", max_length=500)
     metamask_address    = models.CharField("Metamask Address", max_length=500)
     available_funds     = models.FloatField("Available Funds")
