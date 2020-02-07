@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
-    user                = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    user                = models.ForeignKey(User, on_delete=models.CASCADE)
+    username            = models.CharField("Name", max_length=120, default="")
     USER_TYPE           = [
         ('VR', "Vendor"),
         ('FD', "Funder"),
@@ -44,7 +44,7 @@ class UserProfile(models.Model):
     amount_requested    = models.FloatField("Amount Requested")
 
 class Funder(models.Model):
-    user                = models.OneToOneField(User, on_delete=models.CASCADE)
+    user                = models.ForeignKey(User, on_delete=models.CASCADE)
 
     FUNDER_TYPE         = [
         ("IND", "Individual"),
@@ -57,7 +57,7 @@ class Funder(models.Model):
     )
 
 class Vendor(models.Model):
-    user                = models.OneToOneField(User, on_delete=models.CASCADE)
+    user                = models.ForeignKey(User, on_delete=models.CASCADE)
 
     VENDOR_TYPE         = [
         ("PB", "Publicity"),
@@ -72,7 +72,7 @@ class Vendor(models.Model):
     )
 
 class PoliticalParty(models.Model):
-    user                = models.OneToOneField(User, on_delete=models.CASCADE)
+    user                = models.ForeignKey(User, on_delete=models.CASCADE)
     enabled             = models.BooleanField("Enabled", default=True)
     cap                 = models.FloatField("Cap", default='5000')
 
@@ -87,7 +87,7 @@ class PoliticalParty(models.Model):
     )
 
 class Admin(models.Model):
-    user                = models.OneToOneField(User, on_delete=models.CASCADE)
+    user                = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Transaction(models.Model):

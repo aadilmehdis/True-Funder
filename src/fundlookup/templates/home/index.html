@@ -43,14 +43,14 @@
 
         <!--Card image-->
         <div class="view overlay">
-          <img src="../static/img/party/{{ p.symbol }}" class="card-img-top"
-            alt="{{p.name}}">
+          <img src="../static/img/party/{{ p.avatar_path }}" class="card-img-top"
+            alt="{{p.username}}">
         </div>
 
         <!--Card content-->
         <div class="card-body">
           <!--Title-->
-          <h4 class="card-title">{{ p.name }}</h4>
+          <h4 class="card-title">{{ p.username }}</h4>
           <a href="profile/{{ p.pk }}"
             class="btn btn-primary btn-md">View party
             <i class="fas fa-play ml-2"></i>

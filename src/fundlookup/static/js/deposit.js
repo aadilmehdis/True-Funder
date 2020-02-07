@@ -493,14 +493,14 @@ var ABI = [
 ]
 
 var Contract = web3.eth.contract(ABI);
-var contractInstance = Contract.at('0x1f60f5fe5e4dd3ef03c4666c24253d78d3120f71')
+var contractInstance = Contract.at('0x92844c832EfacF268173129605Fc8db455f63983')
 
 let decimals = web3.toBigNumber(18);
 
 function makePayment(from_address, to_address, amount) {
     let amounty = web3.toBigNumber(amount);
     let value = amounty.times(web3.toBigNumber(10).pow(decimals));
-    contractInstance.transfer(to_address, value , {from: from_address/*Admin ethereum account*/}, (error, txHash) => {
+    contractInstance.transfer(to_address, value , (error, txHash) => {
         console.log(txHash)
     })
 }

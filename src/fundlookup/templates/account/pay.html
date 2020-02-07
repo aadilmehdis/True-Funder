@@ -19,7 +19,7 @@
         <!-- Vendor category -->
         <select name="vendor_cat" id="id_vendortype">
           <option value="" id="id_vendortype">---------</option>
-          {% for type in allparty %}
+          {% for type in vendor_types %}
             <option value="{{ type.pk }}">{{ type.name }}</option>
           {% endfor %}
         </select>

@@ -296,6 +296,11 @@ function GetMap() {
             filter: ['has', 'point_count'] //Only rendered data points which have a point_count property, which clusters do.
         });
 
+        map.layers.add(new atlas.layer.HeatMapLayer(datasource, null, {
+          radius: 10,
+          opacity: 0.8
+        }), 'labels');
+
         //Add a click event to the layer so we can zoom in when a user clicks a cluster.
         map.events.add('click', clusterBubbleLayer, clusterClicked);
 

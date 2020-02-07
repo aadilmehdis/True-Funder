@@ -33,9 +33,9 @@
     <div class="sidebar-fixed position-fixed">
 
       <a class="logo-wrapper waves-effect">
-          <img src="../static/img/party/{{ party.symbol }}" class="card-img-top"
-          alt="{{party.name}}" width="300" height="300">
-        <h3 class="display-5"> {{ party.name }} </h3>
+          <img src="../static/img/party/{{ party.avatar_path }}" class="card-img-top"
+          alt="{{party.username}}" width="300" height="300">
+        <h3 class="display-5"> {{ party.username }} </h3>
       </a>
 
       <div class="list-group list-group-flush">
@@ -80,7 +80,7 @@
         {% if analytics_active %}
           <a href="#" class="list-group-item active waves-effect">
         {% else %}
-          <a href="/analytics/{{party.pk}}" class="list-group-item list-group-item-action waves-effect">
+          <a href="/analytics/{{party.user.pk}}" class="list-group-item list-group-item-action waves-effect">
         {% endif %}
         <i class="fas fa-chart-pie mr-3"></i>Analytics</a>
 
