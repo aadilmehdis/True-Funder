@@ -4,6 +4,12 @@ from .models import Party
 import requests
 import json
 import time
+import geopy, sys
+import os
+import pandas
+from geopy.geocoders import Nominatim, GoogleV3
+import csv, json
+from geojson import Feature, FeatureCollection, Point
 
 def index(request):
     print(request.user)
@@ -86,7 +92,7 @@ def pay(request, pk=None):
     return render(request, 'account/pay.html', context)
 
 def analytics(request, pk=None):
-
+    get_loc()
     party = Party.objects.get(pk=pk)
     values = [65, 59, 80, 81, 56, 55, 40]
     labels = ["January", "February", "March", "April", "May", "June", "July"]
@@ -107,3 +113,48 @@ def load_vendor(request):
     vendors = Party.objects.filter(pk__lte=vendor_type)
     # vendors = Vendor.objects.filter(type=vendor_type).order_ascending
     return render(request, 'account/dropdown_vendor.html', {'vendors': vendors})
+
+
+def get_loc():
+
+    def get_latitude(x):
+        return x.latitude
+
+    def get_longitude(x):
+        return x.longitude
+    
+    def get_area_name(x):
+        return x.address
+
+    geolocator = Nominatim(timeout=5)
+
+    data = {'Area_Name':['Kerala', 'Hyderabad', 'Jaipur']}
+    print(os.getcwd())
+    io = pandas.DataFrame(data)
+
+    geolocate_column = io['Area_Name'].apply(geolocator.geocode)
+    io['latitude'] = geolocate_column.apply(get_latitude)
+    io['longitude'] = geolocate_column.apply(get_longitude)
+    io.to_csv('geocoding-output1.csv')
+
+    features = []
+    with open('geocoding-output1.csv', newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        print(reader)
+        i = 0
+        for _, Area_Name, latitude, longitude in reader:
+            if i==0:
+                i = 1
+                continue
+            latitude, longitude = map(float, (latitude, longitude))
+            features.append(
+                Feature(
+                    geometry = Point((longitude, latitude)),
+                    properties = {
+                    }
+                )
+            )
+
+    collection = FeatureCollection(features)
+    with open("./fundlookup/static/map_data/GeoObs888.json", "w") as f:
+        f.write('%s' % collection)

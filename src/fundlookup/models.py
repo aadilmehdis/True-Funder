@@ -67,6 +67,8 @@ class Vendor(models.Model):
 
 class PoliticalParty(models.Model):
     user                = models.OneToOneField(User, on_delete=models.CASCADE)
+    enabled             = models.BooleanField("Enabled", default=True)
+    cap                 = models.FloatField("Cap", default='5000')
 
     PARTY_TYPE         = [
         ("RG", "Regional"),
