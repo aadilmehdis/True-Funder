@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Party
+from .models import Party, UserProfile, Vendor, Funder, PoliticalParty, Admin, Transaction
 import requests
 import json
 import time
@@ -11,14 +11,22 @@ from geopy.geocoders import Nominatim, GoogleV3
 import csv, json
 from geojson import Feature, FeatureCollection, Point
 
+def user_type(pk) :
+
+    try :
+        a = UserProfile.objects.get(pk=pk).user_type
+        print(a)
+    except UserProfile.DoesNotExist :
+        a = None
+    return a
+
 def index(request):
-    print(request.user)
-    print(request.user.pk)
-    print(request.user.is_authenticated)
+
     all_parties = Party.objects.all()
 
     context = {
-        'all_parties': all_parties
+        'all_parties': all_parties,
+        'user_type' : user_type(request.user.pk)
     }
     return render(request, 'home/index.html', context)
 
@@ -54,7 +62,8 @@ def profile(request, pk=None):
         'transaction_active': True,
         'transactions': transaction_history,
         'spent': spent,
-        'received': received
+        'received': received,
+        'user_type' : user_type(request.user.pk),
     }
 
     return render(request, 'account/profile.html', context)
@@ -65,6 +74,7 @@ def transfer(request, pk=None):
     context = {
         'party': party,
         'transfer_active': True,
+        'user_type' : user_type(request.user.pk),
     }
 
     return render(request, 'account/transfer.html', context)
@@ -75,6 +85,7 @@ def deposit(request, pk=None):
     context = {
         'party': party,
         'deposit_active': True,
+        'user_type' : user_type(request.user.pk),
     }
 
     return render(request, 'account/deposit.html', context)
@@ -87,6 +98,7 @@ def pay(request, pk=None):
         'allparty': party,
         'party': myparty,
         'pay_active': True,
+        'user_type' : user_type(request.user.pk)
     }
 
     return render(request, 'account/pay.html', context)
@@ -102,14 +114,14 @@ def analytics(request, pk=None):
         'values': values,
         'labels': labels,
         'party': party,
-        'balance' : "1250 CC"
+        'balance' : "1250 CC",
+        'user_type' : user_type(request.user.pk)
     }
 
     return render(request, 'account/analytics.html', context)
 
 def load_vendor(request):
     vendor_type = request.GET.get('vendor_type')
-    print(vendor_type,"ada")
     vendors = Party.objects.filter(pk__lte=vendor_type)
     # vendors = Vendor.objects.filter(type=vendor_type).order_ascending
     return render(request, 'account/dropdown_vendor.html', {'vendors': vendors})
