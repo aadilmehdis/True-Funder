@@ -1,7 +1,10 @@
 # True Funder
 
-### Enabling transparent political party funding using blockchain
+### Enabling transparent political party funding using Blockchain
 
+![Landing-Page](landing-page.png)
+
+#### First Runners Up - Microsoft CodeFunDo 2019
 
 ## Contents
 
@@ -38,6 +41,8 @@ Using stablecoins as a blockchain-based cryptocurrency solution. The EC enforces
 * Verifiability: Blockchain inherently ensures it
 * Accessiblility: Anyone anywhere using this system can access the data
 * Scalable: Since this system uses Azure Blockchain Services to enable cryptocurrency transactions supported by EC and other relevant organisations
+* Analytics : We provide in-depth analytics regarding how each political party spends the funds they receive along with region wise
+information of fund flow
 
 
 ### Stack
