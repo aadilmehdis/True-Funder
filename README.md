@@ -4,7 +4,11 @@
 
 ![Landing-Page](landing-page.png)
 
-#### First Runners Up - Microsoft CodeFunDo 2019
+### First Runners Up - Microsoft CodeFunDo 2019
+
+### Team
+* [Rohan Chacko](https://github.com/RohanChacko)
+* [AadilMehdi Sanchawala](https://github.com/aadilmehdis)
 
 ## Contents
 
